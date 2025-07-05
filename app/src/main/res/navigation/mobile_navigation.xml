@@ -9,17 +9,29 @@
         android:id="@+id/navigation_wish"
         android:name="com.example.silverscreen.ui.wish.WishFragment"
         android:label="@string/title_wish"
+        app:enterAnim="@anim/none"
+        app:exitAnim="@anim/none"
+        app:popEnterAnim="@anim/none"
+        app:popExitAnim="@anim/none"
         tools:layout="@layout/fragment_wish" />
 
     <fragment
         android:id="@+id/navigation_seen"
         android:name="com.example.silverscreen.ui.seen.SeenFragment"
         android:label="@string/title_seen"
+        app:enterAnim="@anim/none"
+        app:exitAnim="@anim/none"
+        app:popEnterAnim="@anim/none"
+        app:popExitAnim="@anim/none"
         tools:layout="@layout/fragment_seen" />
 
     <fragment
         android:id="@+id/navigation_map"
         android:name="com.example.silverscreen.ui.map.MapFragment"
         android:label="@string/title_map"
+        app:enterAnim="@anim/none"
+        app:exitAnim="@anim/none"
+        app:popEnterAnim="@anim/none"
+        app:popExitAnim="@anim/none"
         tools:layout="@layout/fragment_map" />
 </navigation>
