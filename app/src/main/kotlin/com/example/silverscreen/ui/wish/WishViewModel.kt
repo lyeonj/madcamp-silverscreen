@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class WishViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is wish Fragment"
+        value = "Today's Recommends"
     }
     val text: LiveData<String> = _text
 }
