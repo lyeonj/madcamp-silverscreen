@@ -1,0 +1,7 @@
+<resources>
+    <style name="BottomNavTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="textAllCaps">false</item>
+    </style>
+</resources>
