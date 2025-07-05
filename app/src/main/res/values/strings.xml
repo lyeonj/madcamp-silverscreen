@@ -3,4 +3,5 @@
     <string name="title_wish">wish</string>
     <string name="title_seen">seen</string>
     <string name="title_map">map</string>
+    <string name="image">image</string>
 </resources>
