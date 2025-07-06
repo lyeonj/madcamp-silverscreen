@@ -28,6 +28,9 @@ class SeenFragment : Fragment() {
 
         seenViewModel = ViewModelProvider(this).get(SeenViewModel::class.java)
 
+        seenViewModel.text.observe(viewLifecycleOwner) { value ->
+            binding.textSeen.text = value
+        }
         setupRecyclerView()
 
         return binding.root
@@ -35,8 +38,8 @@ class SeenFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = SeenAdapter(requireContext(), seenViewModel.getImageFileNames())
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
-        binding.recyclerView.adapter = adapter
+        binding.recyclerSeen.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.recyclerSeen.adapter = adapter
     }
 
     override fun onDestroyView() {
