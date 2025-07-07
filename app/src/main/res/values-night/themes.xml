@@ -12,4 +12,15 @@
         <!-- Status bar color -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
+
+    <style name="Theme.SilverScreen.Splash" parent="Theme.SplashScreen">
+        <!-- 스플래시 배경색 -->
+        <item name="windowSplashScreenBackground">@color/black</item>
+        <!-- 스플래시에 띄울 로고(drawable) -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_my_logo</item>
+        <!-- 로고 애니메이션 지속시간 조정 (ms 단위) -->
+        <item name="windowSplashScreenAnimationDuration">2000</item>
+        <!-- SplashScreen 후 적용할 앱 기본 테마 -->
+        <item name="postSplashScreenTheme">@style/Theme.SilverScreen</item>
+    </style>
 </resources>
