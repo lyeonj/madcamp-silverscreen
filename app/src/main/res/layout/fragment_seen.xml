@@ -8,20 +8,55 @@
     android:layout_height="match_parent"
     tools:context=".ui.seen.SeenFragment">
 
-    <TextView
-        android:id="@+id/text_seen"
+    <LinearLayout
+        android:id="@+id/top"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:textAlignment="viewStart"
-        android:textSize="20sp"
-        android:textColor="@color/orange"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/text_seen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="viewStart"
+            android:textSize="20sp"
+            android:textColor="@color/orange"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btnGrid"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_grid"
+            app:tint="#505050" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="18dp"
+            android:background="#505050"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp" />
+
+        <ImageView
+            android:id="@+id/btnList"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_list"
+            app:tint="#505050" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerSeen"
@@ -32,7 +67,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/text_seen"
+        app:layout_constraintTop_toBottomOf="@id/top"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
