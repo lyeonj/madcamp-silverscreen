@@ -8,7 +8,8 @@
     android:layout_marginEnd="12dp"
     android:layout_marginVertical="4dp"
     card_view:cardCornerRadius="8dp"
-    card_view:cardElevation="4dp">
+    card_view:cardElevation="4dp"
+    card_view:cardBackgroundColor="@color/gray_dark">
 
 
     <RelativeLayout
@@ -44,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="15sp"
-                android:textColor="#000"/>
+                android:textColor="@color/white"/>
 
             <!-- 부제목(날짜) -->
             <TextView
@@ -54,7 +55,7 @@
                 android:layout_marginTop="1dp"
                 android:textStyle="bold"
                 android:textSize="12sp"
-                android:textColor="#000"/>
+                android:textColor="@color/white"/>
 
             <!-- 본문 설명 -->
             <TextView
@@ -64,7 +65,7 @@
                 android:layout_marginTop="5dp"
                 android:textStyle="normal"
                 android:textSize="11sp"
-                android:textColor="#000"/>
+                android:textColor="@color/gray_light"/>
 
         </LinearLayout>
 
