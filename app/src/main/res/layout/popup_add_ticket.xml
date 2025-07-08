@@ -33,7 +33,7 @@
         <FrameLayout
             android:id="@+id/imageUpload"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="160dp"
             android:layout_marginBottom="24dp"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:text="영화 제목"
             android:textColor="@color/orange"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:layout_marginBottom="4dp" />
 
         <EditText
@@ -75,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/orange"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="20dp" />
 
         <!-- 별점 -->
         <TextView
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:text="별점"
             android:textColor="@color/orange"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:layout_marginBottom="4dp" />
 
         <androidx.appcompat.widget.AppCompatRatingBar
@@ -93,7 +93,7 @@
             android:numStars="5"
             android:stepSize="1"
             android:isIndicator="false"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="20dp"
             android:layout_gravity="start"
             style="@style/CustomRatingBar" />
 
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:text="명대사 또는 한 줄 소감"
             android:textColor="@color/orange"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:layout_marginBottom="4dp" />
 
         <EditText
@@ -123,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/orange"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="20dp" />
 
         <!-- 관람일 -->
         <TextView
@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:text="관람일"
             android:textColor="@color/orange"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:layout_marginBottom="4dp" />
 
         <EditText
@@ -151,7 +151,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/orange"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="20dp" />
 
         <!-- 관람 장소 -->
         <TextView
@@ -159,7 +159,7 @@
             android:layout_height="wrap_content"
             android:text="관람 장소"
             android:textColor="@color/orange"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:layout_marginBottom="4dp" />
 
         <EditText
@@ -177,7 +177,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/orange"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="20dp" />
 
         <!-- Save Button -->
         <Button

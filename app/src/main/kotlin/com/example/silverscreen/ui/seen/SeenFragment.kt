@@ -8,7 +8,6 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.core.content.ContextCompat
@@ -69,14 +68,14 @@ class SeenFragment : Fragment() {
 
     private fun setupAddButton() {
         binding.btnAdd.setOnClickListener {
-            val popupView = layoutInflater.inflate(R.layout.popup, null)
+            val popupView = layoutInflater.inflate(R.layout.popup_add_ticket, null)
 
             val displayMetrics = resources.displayMetrics
             val screenWidth = displayMetrics.widthPixels
             val screenHeight = displayMetrics.heightPixels
 
             val popupWidth = (screenWidth * 0.75).toInt()
-            val popupHeight = (screenHeight * 0.6).toInt()
+            val popupHeight = (screenHeight * 0.65).toInt()
 
             val popupWindow = PopupWindow(popupView, popupWidth, popupHeight, true).apply {
                 // background + radius
