@@ -1,17 +1,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- 5 star_empty -->
+    <!-- empty -->
     <item android:id="@android:id/background">
         <bitmap
             android:src="@drawable/star_empty"
-            android:tileMode="clamp"
-            android:gravity="center"/>
-    </item>
-
-    <!-- empty -->
-    <item android:id="@android:id/secondaryProgress">
-        <bitmap
-            android:src="@drawable/star_empty"
-            android:tileMode="clamp"
+            android:tileMode="repeat"
             android:gravity="center"/>
     </item>
 
@@ -20,7 +12,7 @@
         <clip>
             <bitmap
                 android:src="@drawable/star_filled"
-                android:tileMode="clamp"
+                android:tileMode="repeat"
                 android:gravity="center"/>
         </clip>
     </item>
