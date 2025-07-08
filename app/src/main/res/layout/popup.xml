@@ -1,21 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/popup"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="12dp"
-    android:gravity="center">
+    android:layout_height="wrap_content"
+    android:background="@drawable/popup_radius_black">
 
-    <TextView
-        android:id="@+id/closeBtn"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="닫기"
-        android:textColor="@android:color/white"
-        android:background="@android:color/darker_gray"
-        android:padding="8dp"
-        android:layout_marginTop="16dp" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
 
-</LinearLayout>
+        <!-- Add Ticket -->
+        <TextView
+            android:id="@+id/addTicket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Ticket"
+            android:textColor="@color/orange"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 이미지 파일 추가 -->
+        <FrameLayout
+            android:id="@+id/imageUpload"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/image_upload_box"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/plusIcon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_add"
+                android:layout_gravity="center"
+                app:tint="@color/orange" />
+        </FrameLayout>
+
+        <!-- 영화 제목  -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="영화 제목"
+            android:textColor="@color/orange"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/inputTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:background="@android:color/transparent"
+            android:inputType="text"
+            android:layout_marginBottom="2dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/orange"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 별점 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="별점"
+            android:textColor="@color/orange"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:numStars="5"
+            android:stepSize="1"
+            android:isIndicator="false"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="start"
+            style="@style/CustomRatingBar" />
+
+        <!-- 한줄평 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="한줄평"
+            android:textColor="@color/orange"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/inputReview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray_medium"
+            android:hint="30자 이내"
+            android:background="@android:color/transparent"
+            android:inputType="text"
+            android:layout_marginBottom="2dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/orange"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 관람일 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="관람일"
+            android:textColor="@color/orange"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/inputDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray_medium"
+            android:hint="예) 20250709"
+            android:background="@android:color/transparent"
+            android:inputType="date"
+            android:layout_marginBottom="2dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/orange"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 관람 장소 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="관람 장소"
+            android:textColor="@color/orange"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/inputPlace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:background="@android:color/transparent"
+            android:inputType="text"
+            android:layout_marginBottom="2dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/orange"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/orange"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp" />
+    </LinearLayout>
+
+</ScrollView>

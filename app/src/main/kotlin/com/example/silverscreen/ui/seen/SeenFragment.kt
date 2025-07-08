@@ -81,11 +81,6 @@ class SeenFragment : Fragment() {
 
             // 팝업창 화면 중앙 정렬
             popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
-
-            // 닫기 버튼
-            popupView.findViewById<TextView>(R.id.closeBtn)?.setOnClickListener {
-                popupWindow.dismiss()
-            }
         }
     }
 
