@@ -12,13 +12,16 @@ import com.example.silverscreen.R
 
 class SeenAdapter(
     private val context: Context,
-    private val imagePaths: List<String>,
+    private val items: List<MovieItem>,
     private val isListView: Boolean
 ) : RecyclerView.Adapter<SeenAdapter.ImageViewHolder>() {
 
     class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
         val titleView: TextView? = itemView.findViewById(R.id.titleView)
+        val ratingView: TextView? = itemView.findViewById(R.id.ratingView)
+        val reviewView: TextView? = itemView.findViewById(R.id.reviewView)
+        val datePlaceView: TextView? = itemView.findViewById(R.id.datePlaceView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
@@ -27,27 +30,22 @@ class SeenAdapter(
         return ImageViewHolder(view)
     }
 
-    override fun getItemCount(): Int = imagePaths.size
+    override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+        val item = items[position]
         val assetManager = context.assets
-        val inputStream = assetManager.open(imagePaths[position])
+        val inputStream = assetManager.open(item.imagePath)
         val bitmap = BitmapFactory.decodeStream(inputStream)
 
         holder.imageView.setImageBitmap(bitmap)
         inputStream.close()
 
-        // ListView일 때 제목 표시
         if (isListView) {
-            holder.titleView?.text = extractTitle(imagePaths[position])
+            holder.titleView?.text = item.title
+            holder.ratingView?.text = "★".repeat(item.rating)
+            holder.reviewView?.text = "${item.review}"
+            holder.datePlaceView?.text = "${item.date}  |  ${item.place}"
         }
-    }
-
-    private fun extractTitle(path: String): String {
-        // 파일 이름에서 확장자 제거하고 공백으로 치환
-        return path.substringAfterLast("/")
-            .substringBeforeLast(".")
-            .replace("_", " ")
-            .replaceFirstChar { it.uppercaseChar() }
     }
 }

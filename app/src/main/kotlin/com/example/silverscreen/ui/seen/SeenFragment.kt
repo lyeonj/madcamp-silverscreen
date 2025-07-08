@@ -79,6 +79,13 @@ class SeenFragment : Fragment() {
                 parentGroup?.removeView(dim)
             }
 
+            // 입력 필드 포커스 제거
+            val inputTitle = popupView.findViewById<View>(R.id.inputTitle)
+            inputTitle.clearFocus()
+
+            val scroll = popupView.findViewById<View>(R.id.popupScrollView)
+            scroll?.requestFocus()
+
             // 팝업창 화면 중앙 정렬
             popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
         }
@@ -116,7 +123,9 @@ class SeenFragment : Fragment() {
             GridLayoutManager(requireContext(), 3)
         }
 
-        adapter = SeenAdapter(requireContext(), seenViewModel.getImageFileNames(), isListView)
+        val movieItems = seenViewModel.getMovieList()
+        adapter = SeenAdapter(requireContext(), movieItems, isListView)
+
         binding.recyclerSeen.layoutManager = layoutManager
         binding.recyclerSeen.adapter = adapter
     }
