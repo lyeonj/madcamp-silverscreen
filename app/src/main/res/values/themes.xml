@@ -15,9 +15,9 @@
 
     <style name="Theme.SilverScreen.Splash" parent="Theme.SplashScreen">
         <!-- 스플래시 배경색 -->
-        <item name="windowSplashScreenBackground">@color/real_black</item>
+        <item name="windowSplashScreenBackground">@color/logo_background</item>
         <!-- 스플래시에 띄울 로고(drawable) -->
-        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_ss</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_silverscreen</item>
         <!-- 로고 애니메이션 지속시간 조정 (ms 단위) -->
         <item name="windowSplashScreenAnimationDuration">2000</item>
         <!-- SplashScreen 후 적용할 앱 기본 테마 -->
