@@ -6,14 +6,10 @@ import androidx.lifecycle.ViewModel
 
 class SeenViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "My Ticket"
-    }
-
+    private val _text = MutableLiveData("My Ticket")
     val text: LiveData<String> = _text
 
-    fun getMovieList(): List<MovieItem> {
-        return listOf(
+    private val _movieList = MutableLiveData<MutableList<MovieItem>>(mutableListOf(
             MovieItem("seen_poster/poster_1.png","Interstellar",5, "“Murph, I love you, forever.”", "2025. 07. 09.", "메가박스 대전신세계"),
             MovieItem("seen_poster/poster_2.png","The Truman Show",5, "“Just in case, Good Afternoon, Good Evening, and Good Night.”", "2025. 07. 07.", "롯데시네마 월드타워점"),
             MovieItem("seen_poster/poster_3.png","Spider Man",4, "힘에는 책임이 따른다", "2024. 07. 06.", "CGV 건대입구"),
@@ -34,7 +30,12 @@ class SeenViewModel : ViewModel() {
             MovieItem("seen_poster/poster_18.png","Minecraft",2, "상상이 곧 세계가 되는 곳", "2025. 05. 05.","CGV 건대입구"),
             MovieItem("seen_poster/poster_19.png","Bohemian Rhapsody",3,"“We are the champions!”","2025. 04. 27.","메가박스 스타필드코엑스몰"),
             MovieItem("seen_poster/poster_20.png","범죄도시",4,"한 대 맞고 시작하는 영화","2025. 03. 20.","롯데시네마 월드타워점")
-        )
-    }
+    ))
 
+    val movieList: LiveData<MutableList<MovieItem>> = _movieList
+
+    fun addMovie(item: MovieItem) {
+        _movieList.value?.add(0, item)
+        _movieList.value = _movieList.value
+    }
 }
