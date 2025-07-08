@@ -3,7 +3,6 @@ package com.example.silverscreen.ui.seen
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +38,7 @@ class SeenAdapter(
         val item = items[position]
 
         try {
-            if (item.imagePath.startsWith("seen_poster")) {
+            if (item.imagePath.startsWith("seen_scene")) {
                 val assetManager = context.assets
                 assetManager.open(item.imagePath).use { inputStream ->
                     val bitmap = BitmapFactory.decodeStream(inputStream)
