@@ -142,7 +142,7 @@
             android:textSize="14sp"
             android:textColor="@color/white"
             android:textColorHint="@color/gray_medium"
-            android:hint="예) 2025. 07. 03."
+            android:hint="예) 2025.07.03."
             android:background="@android:color/transparent"
             android:inputType="date"
             android:layout_marginBottom="2dp" />

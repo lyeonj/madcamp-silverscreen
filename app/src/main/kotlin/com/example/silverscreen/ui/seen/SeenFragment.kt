@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.core.content.ContextCompat
@@ -31,6 +32,7 @@ class SeenFragment : Fragment() {
 
     private val IMAGE_PICK_CODE = 1001
     private var selectedImageView: ImageView? = null
+    private var selectedImageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +48,21 @@ class SeenFragment : Fragment() {
 
         setupAddButton()
         setupViewModeButton()
-        setupRecyclerView()
+
+        seenViewModel.movieList.observe(viewLifecycleOwner) { items ->
+            if (::adapter.isInitialized) {
+                adapter.updateItems(items)
+            } else {
+                val layoutManager = if (isListView) {
+                    LinearLayoutManager(requireContext())
+                } else {
+                    GridLayoutManager(requireContext(), 3)
+                }
+                adapter = SeenAdapter(requireContext(), items.toMutableList(), isListView)
+                binding.recyclerSeen.layoutManager = layoutManager
+                binding.recyclerSeen.adapter = adapter
+            }
+        }
 
         return binding.root
     }
@@ -97,6 +113,21 @@ class SeenFragment : Fragment() {
                 checkPermissionAndOpenGallery()
             }
 
+            val saveBtn = popupView.findViewById<Button>(R.id.saveBtn)
+            saveBtn.setOnClickListener {
+                val title = popupView.findViewById<EditText>(R.id.inputTitle).text.toString()
+                val rating = popupView.findViewById<RatingBar>(R.id.ratingBar).rating.toInt()
+                val review = popupView.findViewById<EditText>(R.id.inputReview).text.toString()
+                val date = popupView.findViewById<EditText>(R.id.inputDate).text.toString()
+                val place = popupView.findViewById<EditText>(R.id.inputPlace).text.toString()
+
+                val imagePath = selectedImageUri?.toString() ?: "default.png"
+                val newItem = MovieItem(imagePath, title, rating, review, date, place)
+                seenViewModel.addMovie(newItem)
+                selectedImageUri = null
+                popupWindow.dismiss()
+            }
+
             // 팝업창 화면 중앙 정렬
             popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
         }
@@ -137,6 +168,8 @@ class SeenFragment : Fragment() {
 
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
             val imageUri: Uri? = data?.data
+            selectedImageUri = imageUri
+
             val plusIcon = selectedImageView
             val parent = plusIcon?.parent as? FrameLayout ?: return
 
@@ -197,17 +230,16 @@ class SeenFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val layoutManager = if (isListView) {
-            LinearLayoutManager(requireContext())
-        } else {
-            GridLayoutManager(requireContext(), 3)
+        seenViewModel.movieList.value?.let {
+            adapter = SeenAdapter(requireContext(), it.toMutableList(), isListView)
+            val layoutManager = if (isListView) {
+                LinearLayoutManager(requireContext())
+            } else {
+                GridLayoutManager(requireContext(), 3)
+            }
+            binding.recyclerSeen.layoutManager = layoutManager
+            binding.recyclerSeen.adapter = adapter
         }
-
-        val movieItems = seenViewModel.getMovieList()
-        adapter = SeenAdapter(requireContext(), movieItems, isListView)
-
-        binding.recyclerSeen.layoutManager = layoutManager
-        binding.recyclerSeen.adapter = adapter
     }
 
     override fun onDestroyView() {
