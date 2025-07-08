@@ -10,13 +10,16 @@
         android:id="@+id/textMap"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="지도"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="4dp"
         android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="Movies Map"
+        android:textColor="@color/orange"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- WebView: Map이 그려질 공간 -->
     <WebView
