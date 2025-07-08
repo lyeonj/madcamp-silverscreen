@@ -57,7 +57,7 @@
         .info .title {
             padding: 5px 0 0 10px;
             height: 30px;
-            background: #eee;
+            background: #BABABA;
             border-bottom: 1px solid #ddd;
             font-size: 18px;
             font-weight: bold;
@@ -152,63 +152,157 @@
         // 지도의 우측에 확대 축소 컨트롤을 추가한다
         map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
+        // 현재 열려있는 오버레이 참조
+        var currentOverlay = null;
 
-        var imageSrc = 'poster_1_1.png', // 마커이미지의 주소입니다
-            imageSize = new kakao.maps.Size(40, 60), // 마커이미지의 크기입니다
-            imageOption = { offset: new kakao.maps.Point(20, 60) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+        var daegeon_mega = new kakao.maps.LatLng(36.3752472, 127.3817729);
+        var daegeon_lotte = new kakao.maps.LatLng(36.3519515, 127.3795064);
+        var lotte_worldtower = new kakao.maps.LatLng(37.5125701, 127.1025624);
+        var cgv_geondae = new kakao.maps.LatLng(37.5397608, 127.0668877);
+        var cgv_yongsan = new kakao.maps.LatLng(37.5297718, 126.9647415);
+        var maga_star = new kakao.maps.LatLng(37.5116620, 127.0594274);
+        var here = new kakao.maps.LatLng(36.3676789, 127.36517);
 
-        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-            markerPosition = new kakao.maps.LatLng(36.3752472, 127.3817729); // 마커가 표시될 위치입니다
+        // 2. 마커 데이터: 각자 markerImg 속성을 추가
+        var markerData = [
+            {
+                position: daegeon_mega,
+                markerImg: 'logo_interstella.png',
+                title: 'Interstellar',
+                img: 'poster_interstella.png',
+                date: '2025. 07. 09.',
+                desc: '“Murph, I love you, forever.”',
+                ratingImg: '5star.png'
+            },
+            {
+                position: lotte_worldtower,
+                markerImg: 'logo_trueman.png',
+                title: 'The Truman Show',
+                img: 'poster_trueman.png',
+                date: '2025. 07. 07.',
+                desc: '“Just in case, Good Afternoon, Good Evening, and Good Night.”',
+                ratingImg: '5star.png'
+            },
+            {
+                position: cgv_geondae,
+                markerImg: 'logo_spiderman.png',
+                title: 'Spider Man',
+                img: 'poster_spiderman.png',
+                date: '2024. 07. 06.',
+                desc: '“힘에는 책임이 따른다”',
+                ratingImg: '4star.png'
+            },
+            {
+                position: daegeon_lotte,
+                markerImg: 'logo_parasite.png',
+                title: '기생충',
+                img: 'poster_parasite.png',
+                date: '2019. 09. 30.',
+                desc: '“너는 계획이 다 있구나.”',
+                ratingImg: '5star.png'
+            },
+            {
+                position: cgv_yongsan,
+                markerImg: 'logo_martian.png',
+                title: 'The Martian',
+                img: 'poster_martian.png',
+                date: '2025. 06. 30.',
+                desc: '“화성에서 감자 키우기..”',
+                ratingImg: '4star.png'
+            },
+            {
+                position: maga_star,
+                markerImg: 'logo_toystory.png',
+                title: 'Toy Story',
+                img: 'poster_toystory.png',
+                date: '2025. 06. 27.',
+                desc: '“You’ve got a friend in me~♪”',
+                ratingImg: '4star.png'
+            },
+            {
+                position: here,
+                markerImg: 'logo_cruella.png',
+                title: 'Cruella',
+                img: 'poster_cruella.png',
+                date: '2025. 06. 24.',
+                desc: '“잔인하다기보단 애달픈 ‘가족’영화.”',
+                ratingImg: '2star.png'
+            }
+        ];
 
-        // 지도에 마커를 표시합니다
-        var marker = new kakao.maps.Marker({
-            position: markerPosition,
-            image: markerImage
+        // 3. 데이터 순회하며 각기 다른 MarkerImage + 오버레이 생성
+        markerData.forEach(function (data) {
+            // 3-1. 각 마커에 맞춘 MarkerImage 생성
+            var imageSrc = data.markerImg, // 마커이미지의 주소입니다
+                imageSize = new kakao.maps.Size(40, 60), // 마커이미지의 크기입니다
+                imageOption = { offset: new kakao.maps.Point(20, 60) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+            // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+                markerPosition = data.position; // 마커가 표시될 위치입니다
+
+            // 지도에 마커를 표시합니다
+            var marker = new kakao.maps.Marker({
+                position: markerPosition,
+                image: markerImage
+            });
+            marker.setMap(map);
+
+            // (2) 오버레이용 DOM 요소 만들기
+            var container = document.createElement('div');
+            container.className = 'wrap';
+            container.innerHTML = `
+                <div class="info">
+                <div class="title">
+                    ${data.title}
+                    <div class="close" title="닫기"></div>
+                </div>
+                <div class="body">
+                    <div class="img">
+                    <img src="${data.img}" width="70" height="70"/>
+                    </div>
+                    <div class="desc">
+                    <div class="ellipsis">관람일: ${data.date}</div>
+                    <div class="jibun ellipsis">${data.desc}</div>
+                    </div>
+                </div>
+                <div class="rating">
+                    <img src="${data.ratingImg}" width="50" height="10"/>
+                </div>
+                </div>`;
+
+            // 마커 위에 커스텀오버레이를 표시합니다
+            // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+            var overlay = new kakao.maps.CustomOverlay({
+                content: container,
+                map: null,
+                position: data.position
+            });
+
+            // (4) 닫기 버튼 이벤트 바인딩
+            container.querySelector('.close').addEventListener('click', function () {
+                overlay.setMap(null);
+                if (currentOverlay === overlay) currentOverlay = null;
+            });
+
+            // (5) 마커 클릭 시 오버레이 보이기
+            kakao.maps.event.addListener(marker, 'click', function () {
+                // 이전 오버레이 닫기
+                if (currentOverlay && currentOverlay !== overlay) {
+                    currentOverlay.setMap(null);
+                }
+
+                // 토글 or 열기
+                if (overlay.getMap()) {
+                    overlay.setMap(null);
+                    currentOverlay = null;
+                } else {
+                    overlay.setMap(map);
+                    currentOverlay = overlay;
+                }
+            });
         });
-        marker.setMap(map);
 
-        // 커스텀 오버레이에 표시할 컨텐츠 입니다
-        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
-        // 별도의 이벤트 메소드를 제공하지 않습니다
-        var content = '<div class="wrap">' +
-            '    <div class="info">' +
-            '        <div class="title">' +
-            '            인터스텔라' +
-            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
-            '        </div>' +
-            '        <div class="body">' +
-            '            <div class="img">' +
-            '                <img src="poster_1_2.png" width="70" height="70">' +
-            '           </div>' +
-            '            <div class="desc">' +
-            '                <div class="ellipsis">관람일: 2025.07.09</div>' +
-            '                <div class="jibun ellipsis">Murph, I love you, forever.</div>' +
-            '            </div>' +
-            '        </div>' +
-            '        <div class="rating">' +
-            '            <img src="4star.png" width="50" height="10">' +
-            '        </div>' +
-            '    </div>' +
-            '</div>';
-
-        // 마커 위에 커스텀오버레이를 표시합니다
-        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-        var overlay = new kakao.maps.CustomOverlay({
-            content: content,
-            map: null,
-            position: marker.getPosition()
-        });
-
-        // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-        kakao.maps.event.addListener(marker, 'click', function () {
-            overlay.setMap(map);
-        });
-
-        // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다
-        function closeOverlay() {
-            overlay.setMap(null);
-        }
     </script>
 </body>
 
