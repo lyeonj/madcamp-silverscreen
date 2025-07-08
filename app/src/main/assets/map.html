@@ -57,7 +57,7 @@
         .info .title {
             padding: 5px 0 0 10px;
             height: 30px;
-            background: #eee;
+            background: #BABABA;
             border-bottom: 1px solid #ddd;
             font-size: 18px;
             font-weight: bold;
@@ -155,27 +155,79 @@
         // 현재 열려있는 오버레이 참조
         var currentOverlay = null;
 
+        var daegeon_mega = new kakao.maps.LatLng(36.3752472, 127.3817729);
+        var daegeon_lotte = new kakao.maps.LatLng(36.3519515, 127.3795064);
+        var lotte_worldtower = new kakao.maps.LatLng(37.5125701, 127.1025624);
+        var cgv_geondae = new kakao.maps.LatLng(37.5397608, 127.0668877);
+        var cgv_yongsan = new kakao.maps.LatLng(37.5297718, 126.9647415);
+        var maga_star = new kakao.maps.LatLng(37.5116620, 127.0594274);
+        var here = new kakao.maps.LatLng(36.3676789, 127.36517);
+
         // 2. 마커 데이터: 각자 markerImg 속성을 추가
         var markerData = [
             {
-                position: new kakao.maps.LatLng(36.3752472, 127.3817729),
-                markerImg: 'poster_1_1.png',
-                title: '인터스텔라',
-                img: 'poster_1_2.png',
-                date: '2025.07.09',
-                desc: 'Murph, I love you, forever.',
+                position: daegeon_mega,
+                markerImg: 'logo_interstella.png',
+                title: 'Interstellar',
+                img: 'poster_interstella.png',
+                date: '2025. 07. 09.',
+                desc: '“Murph, I love you, forever.”',
+                ratingImg: '5star.png'
+            },
+            {
+                position: lotte_worldtower,
+                markerImg: 'logo_trueman.png',
+                title: 'The Truman Show',
+                img: 'poster_trueman.png',
+                date: '2025. 07. 07.',
+                desc: '“Just in case, Good Afternoon, Good Evening, and Good Night.”',
+                ratingImg: '5star.png'
+            },
+            {
+                position: cgv_geondae,
+                markerImg: 'logo_spiderman.png',
+                title: 'Spider Man',
+                img: 'poster_spiderman.png',
+                date: '2024. 07. 06.',
+                desc: '“힘에는 책임이 따른다”',
                 ratingImg: '4star.png'
             },
             {
-                position: new kakao.maps.LatLng(36.3700, 127.3800),
-                markerImg: 'poster_1_1.png',
+                position: daegeon_lotte,
+                markerImg: 'logo_parasite.png',
                 title: '기생충',
-                img: 'poster_1_2.png',
-                date: '2019.05.30',
-                desc: '아카데미 4관왕',
+                img: 'poster_parasite.png',
+                date: '2019. 09. 30.',
+                desc: '“너는 계획이 다 있구나.”',
                 ratingImg: '5star.png'
+            },
+            {
+                position: cgv_yongsan,
+                markerImg: 'logo_martian.png',
+                title: 'The Martian',
+                img: 'poster_martian.png',
+                date: '2025. 06. 30.',
+                desc: '“화성에서 감자 키우기..”',
+                ratingImg: '4star.png'
+            },
+            {
+                position: maga_star,
+                markerImg: 'logo_toystory.png',
+                title: 'Toy Story',
+                img: 'poster_toystory.png',
+                date: '2025. 06. 27.',
+                desc: '“You’ve got a friend in me~♪”',
+                ratingImg: '4star.png'
+            },
+            {
+                position: here,
+                markerImg: 'logo_cruella.png',
+                title: 'Cruella',
+                img: 'poster_cruella.png',
+                date: '2025. 06. 24.',
+                desc: '“잔인하다기보단 애달픈 ‘가족’영화.”',
+                ratingImg: '2star.png'
             }
-            // … 더 추가 가능 …
         ];
 
         // 3. 데이터 순회하며 각기 다른 MarkerImage + 오버레이 생성
