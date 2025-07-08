@@ -1,19 +1,22 @@
 package com.example.silverscreen.ui.seen
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.GridLayout
-import android.widget.PopupWindow
-import android.widget.TextView
+import android.util.Log
+import android.view.*
+import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.silverscreen.R
 import com.example.silverscreen.databinding.FragmentSeenBinding
 
@@ -26,6 +29,10 @@ class SeenFragment : Fragment() {
     private lateinit var adapter: SeenAdapter
 
     private var isListView = false
+
+    private val IMAGE_PICK_CODE = 1001
+    private var selectedImageView: ImageView? = null
+    private var selectedImageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +48,21 @@ class SeenFragment : Fragment() {
 
         setupAddButton()
         setupViewModeButton()
-        setupRecyclerView()
+
+        seenViewModel.movieList.observe(viewLifecycleOwner) { items ->
+            if (::adapter.isInitialized) {
+                adapter.updateItems(items)
+            } else {
+                val layoutManager = if (isListView) {
+                    LinearLayoutManager(requireContext())
+                } else {
+                    GridLayoutManager(requireContext(), 3)
+                }
+                adapter = SeenAdapter(requireContext(), items.toMutableList(), isListView)
+                binding.recyclerSeen.layoutManager = layoutManager
+                binding.recyclerSeen.adapter = adapter
+            }
+        }
 
         return binding.root
     }
@@ -57,16 +78,13 @@ class SeenFragment : Fragment() {
             val popupWidth = (screenWidth * 0.75).toInt()
             val popupHeight = (screenHeight * 0.6).toInt()
 
-            val popupWindow = PopupWindow(popupView, popupWidth, popupHeight, true)
-
-            // background + radius
-            popupWindow.setBackgroundDrawable(
-                requireContext().getDrawable(R.drawable.popup_radius_black)
-            )
-
-            // 팝업창 외부 클릭 시 닫힘
-            popupWindow.isOutsideTouchable = true
-            popupWindow.isFocusable = true
+            val popupWindow = PopupWindow(popupView, popupWidth, popupHeight, true).apply {
+                // background + radius
+                setBackgroundDrawable(requireContext().getDrawable(R.drawable.popup_radius_black))
+                // 팝업창 외부 클릭 시 닫힘
+                isOutsideTouchable = true
+                isFocusable = true
+            }
 
             // 뒷배경 어둡게
             val parent = activity?.window?.decorView?.rootView
@@ -86,8 +104,103 @@ class SeenFragment : Fragment() {
             val scroll = popupView.findViewById<View>(R.id.popupScrollView)
             scroll?.requestFocus()
 
+            // 이미지 업로드
+            val imageUpload = popupView.findViewById<FrameLayout>(R.id.imageUpload)
+            val plusIcon = popupView.findViewById<ImageView>(R.id.plusIcon)
+
+            imageUpload.setOnClickListener {
+                selectedImageView = plusIcon
+                checkPermissionAndOpenGallery()
+            }
+
+            val saveBtn = popupView.findViewById<Button>(R.id.saveBtn)
+            saveBtn.setOnClickListener {
+                val title = popupView.findViewById<EditText>(R.id.inputTitle).text.toString()
+                val rating = popupView.findViewById<RatingBar>(R.id.ratingBar).rating.toInt()
+                val review = popupView.findViewById<EditText>(R.id.inputReview).text.toString()
+                val date = popupView.findViewById<EditText>(R.id.inputDate).text.toString()
+                val place = popupView.findViewById<EditText>(R.id.inputPlace).text.toString()
+
+                val imagePath = selectedImageUri?.toString() ?: "default.png"
+                val newItem = MovieItem(imagePath, title, rating, review, date, place)
+                seenViewModel.addMovie(newItem)
+                selectedImageUri = null
+                popupWindow.dismiss()
+            }
+
             // 팝업창 화면 중앙 정렬
             popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
+        }
+    }
+
+    private fun checkPermissionAndOpenGallery() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_MEDIA_IMAGES
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissions(arrayOf(Manifest.permission.READ_MEDIA_IMAGES), 2001)
+            } else {
+                openGallery()
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 2001)
+            } else {
+                openGallery()
+            }
+        }
+    }
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
+            val imageUri: Uri? = data?.data
+            selectedImageUri = imageUri
+
+            val plusIcon = selectedImageView
+            val parent = plusIcon?.parent as? FrameLayout ?: return
+
+            if (imageUri != null && plusIcon != null) {
+                // 기존 이미지 제거 (plusIcon 제외)
+                for (i in 0 until parent.childCount) {
+                    val child = parent.getChildAt(i)
+                    if (child is ImageView && child != plusIcon) {
+                        parent.removeView(child)
+                        break
+                    }
+                }
+
+                // 새 이미지뷰 생성
+                val imageView = ImageView(requireContext()).apply {
+                    layoutParams = FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.MATCH_PARENT,
+                        FrameLayout.LayoutParams.MATCH_PARENT
+                    )
+                    scaleType = ImageView.ScaleType.CENTER_CROP
+                }
+
+                // Glide로 이미지 로드
+                Glide.with(requireContext())
+                    .load(imageUri)
+                    .into(imageView)
+
+                // plus 아이콘 숨기고 이미지뷰 추가
+                plusIcon.visibility = View.GONE
+                parent.addView(imageView)
+            }
         }
     }
 
@@ -117,17 +230,16 @@ class SeenFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val layoutManager = if (isListView) {
-            LinearLayoutManager(requireContext())
-        } else {
-            GridLayoutManager(requireContext(), 3)
+        seenViewModel.movieList.value?.let {
+            adapter = SeenAdapter(requireContext(), it.toMutableList(), isListView)
+            val layoutManager = if (isListView) {
+                LinearLayoutManager(requireContext())
+            } else {
+                GridLayoutManager(requireContext(), 3)
+            }
+            binding.recyclerSeen.layoutManager = layoutManager
+            binding.recyclerSeen.adapter = adapter
         }
-
-        val movieItems = seenViewModel.getMovieList()
-        adapter = SeenAdapter(requireContext(), movieItems, isListView)
-
-        binding.recyclerSeen.layoutManager = layoutManager
-        binding.recyclerSeen.adapter = adapter
     }
 
     override fun onDestroyView() {
