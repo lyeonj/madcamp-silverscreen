@@ -1,7 +1,7 @@
 > <h4>2025S KAIST 몰입캠프</h4>
 > <h4>Week 1 : 2025. 07. 03. ~ 2025. 07. 09.</h4>
-<br/>
 
+<br/>
 
 ## 👥 Team Members
 <table>
@@ -55,6 +55,26 @@
 <br/>
 
 ## ⚙ Tech Stack
+<table>
+  <thead>
+    <tr>
+      <th>Framework</th>
+      <th>Language</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <img src="https://img.shields.io/badge/Android%20Studio-3DDC84?style=flat-square&logo=Android%20Studio&logoColor=white"/>
+      </td>
+      <td>
+        <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=Kotlin&logoColor=white"/>
+        <img src="https://img.shields.io/badge/XML-005FAD?style=flat-square&logo=xml&logoColor=white"/>
+        <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white"/>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <br />
 
@@ -63,5 +83,5 @@
 <br />
 
 ## 🔗 Demo & Design Resources
-- 📦 <a href="https://drive.google.com/file/d/1jpdcbpNA5zjxAn5izv7_0_v-gNW7Yd6M/view?usp=sharing">APK</a>
+- 📦 <a href="https://drive.google.com/file/d/1jpdcbpNA5zjxAn5izv7_0_v-gNW7Yd6M/view?usp=sharing">APK file</a>
 - 🎨 <a href="https://www.figma.com/design/ofn0OsQJtWnXR6W8Tb5NP3/2025S-Madcamp-Week-1---Silver-Screen?node-id=0-1&t=WaG0kPPEFvBoc1GM-1">Figma</a>
