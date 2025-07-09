@@ -83,5 +83,5 @@
 <br />
 
 ## 🔗 Demo & Design Resources
-- 📦 <a href="https://drive.google.com/file/d/1jpdcbpNA5zjxAn5izv7_0_v-gNW7Yd6M/view?usp=sharing">APK file</a>
-- 🎨 <a href="https://www.figma.com/design/ofn0OsQJtWnXR6W8Tb5NP3/2025S-Madcamp-Week-1---Silver-Screen?node-id=0-1&t=WaG0kPPEFvBoc1GM-1">Figma</a>
+- 📦 <a href="https://drive.google.com/file/d/1jpdcbpNA5zjxAn5izv7_0_v-gNW7Yd6M/view?usp=sharing" target="_blank">APK file</a>
+- 🎨 <a href="https://www.figma.com/design/ofn0OsQJtWnXR6W8Tb5NP3/2025S-Madcamp-Week-1---Silver-Screen?node-id=0-1&t=WaG0kPPEFvBoc1GM-1" target="_blank">Figma</a>
