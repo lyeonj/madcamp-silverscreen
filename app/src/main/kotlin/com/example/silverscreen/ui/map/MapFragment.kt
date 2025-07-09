@@ -32,7 +32,7 @@ class MapFragment : Fragment() {
         }
         binding.webviewMap.webViewClient   = WebViewClient()
         binding.webviewMap.webChromeClient = WebChromeClient()
-        binding.webviewMap.loadUrl("http://143.248.171.100:3000/map.html")
+        binding.webviewMap.loadUrl("http://143.248.171.89:3000/map.html")
 
         return root
     }
