@@ -79,6 +79,51 @@
 <br />
 
 ## 📱 App Preview
+**🎞️ Recommend & Wish**
+<table>
+    <tr>
+        <td>
+            <img width="200" height="356" alt="Image" src="https://github.com/user-attachments/assets/3a89cdc8-936b-4fdb-96a7-ee904a5addf7" />
+        </td>
+        <td>
+            <img width="200" height="356" alt="Image" src="https://github.com/user-attachments/assets/bfe98684-c2d3-4cc9-9950-544ca63c1481" />
+        </td>
+    </tr>
+</table>
+
+<br/>
+
+**🎟️ My Ticket**
+<table>
+    <tr>
+        <td>
+            <img width="200" height="356" alt="Image" src="https://github.com/user-attachments/assets/0cecd506-4ef7-4116-bc0b-8db3202216f2" />
+        </td>
+        <td>
+            <img width="200" height="356" alt="Image" src="https://github.com/user-attachments/assets/1afbbe76-ac91-4d23-a2fd-e5bb22263d74" />
+        </td>
+        <td>
+            <img width="200" height="356" alt="Image" src="https://github.com/user-attachments/assets/74cff1c1-83cf-46e0-be94-0aa00305edc7" />
+        </td>
+        <td>
+            <img width="200" height="356" alt="Image" src="https://github.com/user-attachments/assets/06ee4ec3-cfc1-42f6-a6d8-95671e7a9be9" />
+        </td>
+    </tr>
+</table>
+
+<br/>
+
+**🗺️ Movies Map**
+<table>
+    <tr>
+        <td>
+            <img width="200" height="356" alt="Image" src="https://github.com/user-attachments/assets/7717a07e-c4c2-4d60-8850-bff93e46d0ae" />
+        </td>
+        <td>
+            <img width="200" height="356" alt="Image" src="https://github.com/user-attachments/assets/c5c4a9a4-7c4f-41b4-aa03-0b9a848ce4cb" />
+        </td>
+    </tr>
+</table>
 
 <br />
 
