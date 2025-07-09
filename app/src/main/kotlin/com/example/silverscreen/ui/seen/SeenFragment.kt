@@ -88,7 +88,7 @@ class SeenFragment : Fragment() {
             // 뒷배경 어둡게
             val parent = activity?.window?.decorView?.rootView
             val dim = View(activity)
-            dim.setBackgroundColor(Color.parseColor("#B3000000"))
+            dim.setBackgroundColor(Color.parseColor("#CC000000"))
             val parentGroup = parent as? ViewGroup
             parentGroup?.addView(dim, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
 
