@@ -128,5 +128,5 @@
 <br />
 
 ## 🔗 Demo & Design Resources
-- ⚙️ <a href="https://drive.google.com/file/d/1WOp8KBrBVylhcjiP0NL-dffYF82_DW-n/view?usp=sharing" target="_blank">APK file</a>
+- 📂 <a href="https://drive.google.com/file/d/1WOp8KBrBVylhcjiP0NL-dffYF82_DW-n/view?usp=sharing" target="_blank">APK file</a>
 - 🎨 <a href="https://www.figma.com/design/ofn0OsQJtWnXR6W8Tb5NP3/2025S-Madcamp-Week-1---Silver-Screen?node-id=0-1&t=WaG0kPPEFvBoc1GM-1" target="_blank">Figma</a>
